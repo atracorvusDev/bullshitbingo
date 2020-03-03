@@ -13,7 +13,8 @@ export class ItemComponent implements OnInit {
   @Input()
   text;
 
-  isSelected = false;
+  @Input()
+  isSelected;
   
   constructor() { }
 

@@ -1,5 +1,5 @@
 <div class="field-container" gdColumns="repeat(5, 1fr)"  gdRows="repeat(5, 1fr)" gdAuto="row" gdGap="10px" gdAlignColumns="space-evenly">
     <div *ngFor="let item of items" gdGridAlign="stretch">
-        <app-item [id]="item" [text]="item"></app-item>
+        <app-item [id]="item.id" [text]="item.text" [isSelected]="item.isSelected"></app-item>
     </div>
 </div>
