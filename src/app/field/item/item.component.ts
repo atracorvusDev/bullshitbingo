@@ -7,15 +7,29 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ItemComponent implements OnInit {
 
-@Input()
-id;
+  @Input()
+  id;
 
-@Input()
-text;
+  @Input()
+  text;
+
+  isSelected = false;
   
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  select():void {
+    this.isSelected = !this.isSelected;
+
+    let element = document.getElementById(this.id);
+    if(this.isSelected){
+      element.className = 'single-item selected';
+    }
+    else{
+      element.className = 'single-item';
+    }
   }
 
 }
