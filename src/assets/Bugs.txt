@@ -1,0 +1,10 @@
+########
+# BUGS #
+########
+
+#1 - offen
+-> gesamter Content etwas zu groß
+-> vermutlich hängt es mit gdRows="... auto ..." zusammen
+
+# - offen
+-> Padding um Field, damit die Items nicht am Rand kleben

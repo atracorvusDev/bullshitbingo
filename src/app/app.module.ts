@@ -4,11 +4,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { FieldComponent } from './field/field/field.component';
+import { ItemComponent } from './field/item/item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FieldComponent
+    FieldComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
