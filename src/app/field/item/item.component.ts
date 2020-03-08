@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-item',
@@ -13,17 +14,22 @@ export class ItemComponent implements OnInit {
   @Input()
   text;
 
-  @Input()
   isSelected;
+
+  @Output() 
+  selectedEmitter:EventEmitter<Item> = new EventEmitter();
   
   constructor() { }
 
   ngOnInit(): void {
+    this.isSelected = false;
   }
 
   select():void {
+    // update isSelected
     this.isSelected = !this.isSelected;
 
+    // update UI
     let element = document.getElementById(this.id);
     if(this.isSelected){
       element.className = 'single-item selected';
@@ -31,6 +37,12 @@ export class ItemComponent implements OnInit {
     else{
       element.className = 'single-item';
     }
+
+    // update gameplay
+    const updateItem = new Item();
+    updateItem.id = this.id;
+    updateItem.isSelected = this.isSelected;
+    this.selectedEmitter.emit(updateItem);
   }
 
 }

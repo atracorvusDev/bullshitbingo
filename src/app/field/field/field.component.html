@@ -1,5 +1,9 @@
+<div *ngIf="isBingo()"  style="text-align: center;">
+    <h1>Bingo! Du hast gewonnen!</h1>
+    <p>Um noch einmal zu spielen, bitte die Seite refreshen.</p>
+</div>
 <div class="field-container" gdColumns="repeat(5, 1fr)"  gdRows="repeat(5, 1fr)" gdAuto="row" gdGap="10px" gdAlignColumns="space-evenly">
     <div *ngFor="let item of items" gdGridAlign="stretch">
-        <app-item [id]="item.id" [text]="item.text" [isSelected]="item.isSelected"></app-item>
+        <app-item [id]="item.id" [text]="item.text" (selectedEmitter)="updateItems($event)"></app-item>
     </div>
 </div>
