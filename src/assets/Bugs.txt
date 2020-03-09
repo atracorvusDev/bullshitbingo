@@ -8,3 +8,7 @@
 
 # - offen
 -> Padding um Field, damit die Items nicht am Rand kleben
+
+# - offen
+-> mit richtigem Inhalt sind die Felder unterschiedlich groß
+-> auf kleinen Bildschirmen (Handys) ist der Content beiter als der sichtbare Bereich

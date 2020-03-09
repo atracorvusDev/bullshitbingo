@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../item';
-import { ItemComponent } from '../item/item.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-field',
@@ -21,7 +21,8 @@ export class FieldComponent implements OnInit {
 
   bingo = false;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {
+   }
 
   ngOnInit(): void {
     this.items = new Array();
@@ -32,8 +33,8 @@ export class FieldComponent implements OnInit {
     return this.bingo;
   }
 
-  private buildNewField():void{
-    const randomPhraseList = this.getRandomPhraseList();
+  private async buildNewField(){
+    const randomPhraseList = await this.getRandomPhraseList();
     for(var i = 0; i < 25; i++){
       const current = new Item();
       current.id = i;
@@ -43,8 +44,8 @@ export class FieldComponent implements OnInit {
     }
   }
 
-  private getRandomPhraseList():string[] {
-    const phrases = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  private async getRandomPhraseList():Promise<string[]> {
+    const phrases = await this.getListFromFile();
     const randomList = new Array();
 
     for(var i = 0; i < 25; i++){
@@ -55,6 +56,20 @@ export class FieldComponent implements OnInit {
       randomList.push(phrases[randomNumber]);
     }
     return randomList;
+  }
+
+  private async getListFromFile():Promise<string[]> {
+    const placeholder = "Platzhalter-";
+
+    var dataFromFile = await this.httpClient.get('./assets/phrases.txt', {responseType: 'text'}).toPromise();
+    
+    const phrases = dataFromFile.split("\n");
+
+    for(var i = 1; phrases.length < 25; i++){
+      phrases.push(placeholder+i);
+    }
+
+    return phrases;
   }
 
   updateItems(updated:Item):void {
