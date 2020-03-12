@@ -1,5 +1,4 @@
 agil
-Agilisierung
 Am Ende des Tages
 Benchmark
 Best Practice
@@ -8,11 +7,21 @@ Cut-Over
 Decomissioning
 Deep Dive
 Digitalisierung
+Enabling
+End-to-End
+Experte
+Feedback
 Herausforderung
 Impact
+Knowhow
+Lösung
 Neue Medien
 Open Space
 Projekt
 Roadmap
+Team
+Use Case
 Scope
 Wachstum
+Weiterentwicklung
+Zielerreichung
