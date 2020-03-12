@@ -1,6 +1,6 @@
 .single-item{
     background-color: lightgray;
-    border: darkblue solid 2px;
+    border: var(--main-blue) solid 2px;
     border-radius: 7px;
 }
 
@@ -9,12 +9,13 @@
 }
 
 .selected{
-    background-color:darkblue;
+    background-color:var(--main-blue);
     color: whitesmoke;
 }
 
 .win{
-    background-color: green;
-    border: black solid 2px;
+    background-color: var(--main-green);
+    border: darkgreen solid 2px;
     color: whitesmoke;
+    text-shadow: 1px 1px 2px black;
 }

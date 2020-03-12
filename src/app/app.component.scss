@@ -3,15 +3,14 @@
 }
 
 .header{
-    border-bottom: solid darkblue 2px;
+    background-color: var(--main-blue);
+    color:whitesmoke;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue;
     font-size: 3em;
     font-weight: bold;
     text-align: center;
 }
 
-.footer{
-    border-top: solid darkblue 2px;
-    font-size: 1em;
-    text-align: end;
-    padding-right: 10px;
+.content{
+    padding: 10px;
 }
