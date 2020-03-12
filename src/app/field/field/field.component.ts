@@ -88,8 +88,11 @@ export class FieldComponent implements OnInit {
     const row = this.getRowOfID(id);
     var index = 0;
     var itemID = this.idMap[row][index];
+    var winningArray = [];
     while(this.items[itemID].isSelected){
+      winningArray.push(itemID);
       if(index === 4){
+        this.updateGuiAtBingo(winningArray);
         return true;
       }
       index++;
@@ -97,13 +100,16 @@ export class FieldComponent implements OnInit {
     }
     return false;
   }
-
+  
   private checkVertical(id:number):boolean {
     const column = this.getColumnOfID(id);
     var index = 0;
     var itemID = this.idMap[index][column];
+    var winningArray = [];
     while(this.items[itemID].isSelected){
+      winningArray.push(itemID);
       if(index === 4){
+        this.updateGuiAtBingo(winningArray);
         return true;
       }
       index++;
@@ -130,12 +136,13 @@ export class FieldComponent implements OnInit {
     const leftTopRightBottom = [0, 6, 12, 18, 24];
     const leftBottomRightTop = [4, 8, 12, 16, 20];
 
-    if(this.items[12].isSelected && (leftTopRightBottom.includes(id) || leftBottomRightTop.includes(id))){
+    if(this.items[12].isSelected){
       if(leftTopRightBottom.includes(id)){
         var recent = 0;
         var itemID = leftTopRightBottom[recent];
         while(this.items[itemID].isSelected){
           if(recent === 4){
+            this.updateGuiAtBingo(leftTopRightBottom);
             return true;
           }
           recent++;
@@ -147,6 +154,7 @@ export class FieldComponent implements OnInit {
         var itemID = leftBottomRightTop[recent];
         while(this.items[itemID].isSelected){
           if(recent === 4){
+            this.updateGuiAtBingo(leftBottomRightTop);
             return true;
           }
           recent++;
@@ -155,5 +163,12 @@ export class FieldComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  private updateGuiAtBingo(winningArray: number[]){
+    for(let index of winningArray){
+      var element = document.getElementById(index.toString());
+      element.className = 'single-item win';
+    }
   }
 }
