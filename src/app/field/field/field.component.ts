@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./field.component.scss']
 })
 export class FieldComponent implements OnInit {
+  
+  bingo = false;
 
   items: Item[];
 
@@ -18,8 +20,6 @@ export class FieldComponent implements OnInit {
     [15, 16, 17, 18, 19],
     [20, 21, 22, 23, 24]
   ];
-
-  bingo = false;
 
   constructor(private httpClient: HttpClient) {
    }
@@ -32,6 +32,12 @@ export class FieldComponent implements OnInit {
   isBingo():boolean{
     return this.bingo;
   }
+  
+  public refreshField():void{
+    this.bingo = false;
+    this.items = new Array();
+    this.buildNewField();
+  }
 
   private async buildNewField(){
     const randomPhraseList = await this.getRandomPhraseList();
@@ -43,6 +49,7 @@ export class FieldComponent implements OnInit {
       this.items.push(current);
     }
   }
+
 
   private async getRandomPhraseList():Promise<string[]> {
     const phrases = await this.getListFromFile();
@@ -73,7 +80,6 @@ export class FieldComponent implements OnInit {
   }
 
   updateItems(updated:Item):void {
-    console.log("Updated Item: ID=" + updated.id + " isSelected=" + updated.isSelected);
     this.items[updated.id].isSelected = updated.isSelected;
     this.checkBingo(updated.id);
   }
