@@ -6,4 +6,4 @@ Spielbar hier: https://atracorvus.de/bingo
 
 ## Bugs
 - Bugs bitte hier unter [Issues](https://github.com/atracorvusDev/bullshitbingo/issues) melden!
-- Bekannte Bugs: https://github.com/atracorvusDev/bullshitbingo/tree/master/src/assets/Bugs.txt 
+- [Bekannte Bugs](./src/assets/Bugs.txt) 
