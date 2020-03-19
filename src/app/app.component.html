@@ -1,9 +1,19 @@
 <div class="container" gdColumns="auto" gdRows="[header-start] 60px [header-end content-start] auto [content-end]">
-    <div class="header" gdRow="header-start / header-end">Bullshitbingo</div>
+    <div class="header" gdRow="header-start / header-end" gdColumns="[left-start] 15% [left-end center-start] 70% [center-end right-start] 15% [right-end]">
+        <div class="header-left" fxHide.lt-md="true" gdColumn="left-start / left-end" gdGridAlign="start center">
+            <a href="https://atracorvus.de/bingo">
+                <img src="./assets/refresh_48x48.png" height="48" width="48">
+            </a>
+        </div>
+        <div class="header-center" gdColumn="center-start / center-end">Bullshitbingo</div>
+        <div class="header-right" fxHide.lt-md="true" gdColumn="right-start / right-end" fxLayout="column" fxLayoutAlign="end end">
+            <a fxFlex href="https://github.com/atracorvusDev/bullshitbingo/issues">Bug melden</a>
+            <div fxFlex>
+                Version: {{version}}
+            </div>   
+        </div>
+    </div>
     <div class="content" gdRow="content-start / content-end">
         <app-field></app-field>
     </div>
-    <!-- <div class="footer" gdRow="footer-start / footer-end">
-        <a href="https://github.com/atracorvusDev/bullshitbingo/issues">Bug melden</a>
-        Version: {{version}}</div> -->
 </div>

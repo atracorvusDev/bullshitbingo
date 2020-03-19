@@ -2,13 +2,20 @@
 # BUGS #
 ########
 
-#1 - offen
--> gesamter Content etwas zu groß
--> vermutlich hängt es mit gdRows="... auto ..." zusammen
-
-# - offen
--> Padding um Field, damit die Items nicht am Rand kleben
-
-# - offen
+---------
+- offen -
+---------
 -> mit richtigem Inhalt sind die Felder unterschiedlich groß
--> auf kleinen Bildschirmen (Handys) ist der Content beiter als der sichtbare Bereich
+    -> auf kleinen Bildschirmen (Handys) ist der Content beiter als der sichtbare Bereich
+    
+-> Refresh-Icon ist vertikal nicht mittig
+
+
+------------
+- erledigt -
+------------
+-> gesamter Content etwas zu groß
+    -> Lösung: Footer gelöscht, Version und Bug-Meldung in Header aufgenommen
+
+-> Padding um Field, damit die Items nicht am Rand kleben
+    -> erledigt
