@@ -1,12 +1,12 @@
-<div *ngIf="isBingo()"  style="text-align: center;">
+<div *ngIf="fieldService.isBingo()"  style="text-align: center;">
     <img src="./assets/bingo.png">
     <br>
-    <button type="button" (click)="refreshField()">Noch mal spielen</button>
+    <!-- <button type="button" (click)="refreshField()">Noch mal spielen</button> -->
     <br>
     <br>
 </div>
 <div class="field-container" gdColumns="repeat(5, 1fr)"  gdRows="repeat(5, 1fr)" gdAuto="row" gdGap="10px" gdAlignColumns="space-evenly">
-    <div *ngFor="let item of items" gdGridAlign="stretch">
-        <app-item [id]="item.id" [text]="item.text" (selectedEmitter)="updateItems($event)"></app-item>
+    <div *ngFor="let item of fieldService.items" gdGridAlign="stretch">
+        <app-item [id]="item.id" [text]="item.text" (selectedEmitter)="fieldService.updateItem($event)"></app-item>
     </div>
 </div>

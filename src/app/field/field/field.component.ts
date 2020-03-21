@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Item } from '../item';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Item } from '../item';
+import { FieldService } from '../field.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-field',
@@ -8,173 +10,19 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./field.component.scss']
 })
 export class FieldComponent implements OnInit {
-  
-  bingo = false;
 
-  items: Item[];
-
-  readonly idMap = [
-    [0, 1, 2, 3, 4],
-    [5, 6, 7, 8, 9],
-    [10, 11, 12, 13, 14],
-    [15, 16, 17, 18, 19],
-    [20, 21, 22, 23, 24]
-  ];
-
-  constructor(private httpClient: HttpClient) {
-   }
+  constructor(public fieldService:FieldService) {
+  }
 
   ngOnInit(): void {
-    this.items = new Array();
-    this.buildNewField();
   }
 
   isBingo():boolean{
-    return this.bingo;
-  }
-  
-  public refreshField():void{
-    this.bingo = false;
-    this.items = new Array();
-    this.buildNewField();
-  }
-
-  private async buildNewField(){
-    const randomPhraseList = await this.getRandomPhraseList();
-    for(var i = 0; i < 25; i++){
-      const current = new Item();
-      current.id = i;
-      current.text = randomPhraseList[i];
-      current.isSelected = false;
-      this.items.push(current);
-    }
-  }
-
-
-  private async getRandomPhraseList():Promise<string[]> {
-    const phrases = await this.getListFromFile();
-    const randomList = new Array();
-
-    for(var i = 0; i < 25; i++){
-      var randomNumber = Math.floor(Math.random() * Math.floor(phrases.length));
-      while(randomList.includes(phrases[randomNumber])){
-        randomNumber = Math.floor(Math.random() * Math.floor(phrases.length));
-      }
-      randomList.push(phrases[randomNumber]);
-    }
-    return randomList;
-  }
-
-  private async getListFromFile():Promise<string[]> {
-    const placeholder = "Platzhalter-";
-
-    var dataFromFile = await this.httpClient.get('./assets/phrases.txt', {responseType: 'text'}).toPromise();
-    
-    const phrases = dataFromFile.split("\n");
-
-    for(var i = 1; phrases.length < 25; i++){
-      phrases.push(placeholder+i);
-    }
-
-    return phrases;
+    return this.fieldService.isBingo();
   }
 
   updateItems(updated:Item):void {
-    this.items[updated.id].isSelected = updated.isSelected;
-    this.checkBingo(updated.id);
+    //Service updaten
   }
 
-  private checkBingo(id:number):void {
-    if(this.checkHorizontal(id) || this.checkVertical(id) || this.checkDiagonal(id)){
-      this.bingo = true;
-    }
-  }
-
-  private checkHorizontal(id:number):boolean {
-    const row = this.getRowOfID(id);
-    var index = 0;
-    var itemID = this.idMap[row][index];
-    var winningArray = [];
-    while(this.items[itemID].isSelected){
-      winningArray.push(itemID);
-      if(index === 4){
-        this.updateGuiAtBingo(winningArray);
-        return true;
-      }
-      index++;
-      itemID = this.idMap[row][index];
-    }
-    return false;
-  }
-  
-  private checkVertical(id:number):boolean {
-    const column = this.getColumnOfID(id);
-    var index = 0;
-    var itemID = this.idMap[index][column];
-    var winningArray = [];
-    while(this.items[itemID].isSelected){
-      winningArray.push(itemID);
-      if(index === 4){
-        this.updateGuiAtBingo(winningArray);
-        return true;
-      }
-      index++;
-      itemID = this.idMap[index][column];
-    }
-    return false;
-  }
-
-  private getRowOfID(id:number):number{
-    for(var row = 0; row < 5; row++){
-      if(this.idMap[row].includes(id)){
-        return row;
-      }
-    }
-    return -1;
-  }
-
-  private getColumnOfID(id:number):number{
-    const row = this.getRowOfID(id);
-    return this.idMap[row].indexOf(id);
-  }
-
-  private checkDiagonal(id:number):boolean {
-    const leftTopRightBottom = [0, 6, 12, 18, 24];
-    const leftBottomRightTop = [4, 8, 12, 16, 20];
-
-    if(this.items[12].isSelected){
-      if(leftTopRightBottom.includes(id)){
-        var recent = 0;
-        var itemID = leftTopRightBottom[recent];
-        while(this.items[itemID].isSelected){
-          if(recent === 4){
-            this.updateGuiAtBingo(leftTopRightBottom);
-            return true;
-          }
-          recent++;
-          itemID = leftTopRightBottom[recent];
-        }
-      }
-      if(leftBottomRightTop.includes(id)){
-        var recent = 0;
-        var itemID = leftBottomRightTop[recent];
-        while(this.items[itemID].isSelected){
-          if(recent === 4){
-            this.updateGuiAtBingo(leftBottomRightTop);
-            return true;
-          }
-          recent++;
-          itemID = leftBottomRightTop[recent];
-        }
-      }
-    }
-    return false;
-  }
-
-  private updateGuiAtBingo(winningArray: number[]){
-    for(let index of winningArray){
-      var element = document.getElementById(index.toString());
-      element.className = 'single-item win';
-    }
-  }
 }

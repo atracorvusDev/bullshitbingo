@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FieldComponent } from './field/field/field.component';
 import { ItemComponent } from './field/item/item.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ItemComponent } from './field/item/item.component';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FlexLayoutModule,
     HttpClientModule
   ],

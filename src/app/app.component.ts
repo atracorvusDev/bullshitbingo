@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { version } from '../../package.json';
+import { FieldService } from './field/field.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,7 @@ import { version } from '../../package.json';
 export class AppComponent {
   title = 'Bullshitbingo';
   public version: string = version;
+  
+  constructor(public fieldService:FieldService) {
+  }
 }
